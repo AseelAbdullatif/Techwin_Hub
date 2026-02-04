@@ -1,36 +1,30 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
-import COLORS from '../../conts/colors';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import Color from '../../utils/colors/Color';
 const Input = ({
-//   label,
-//   iconName,
+
   error,
   password,
-//   onFocus = () => {},
+  onFocus = () => { },
   ...props
 }) => {
   const [hidePassword, setHidePassword] = React.useState(password);
-//   const [isFocused, setIsFocused] = React.useState(false);
+  const [isFocused, setIsFocused] = React.useState(false);
   return (
-    <View style={{marginBottom: 20}}>
-      {/* <Text style={style.label}>{label}</Text> */}
+    <View style={{ marginBottom: 20 }}>
       <View
         style={[
           style.inputContainer,
           {
             borderColor: error
-              ? COLORS.red
+              ? Color.NormalRed
               : isFocused
-              ? COLORS.darkBlue
-              : COLORS.light,
+                ? Color.NormalBlue
+                : Color.DarkGray,
             alignItems: 'center',
           },
         ]}>
-        <Icon
-          name={iconName}
-          style={{color: COLORS.darkBlue, fontSize: 22, marginRight: 10}}
-        />
+
         <TextInput
           autoCorrect={false}
           onFocus={() => {
@@ -39,19 +33,13 @@ const Input = ({
           }}
           onBlur={() => setIsFocused(false)}
           secureTextEntry={hidePassword}
-          style={{color: COLORS.darkBlue, flex: 1}}
+          style={{ color: Color.NormalBlue, flex: 1 }}
           {...props}
         />
-        {password && (
-          <Icon
-            onPress={() => setHidePassword(!hidePassword)}
-            name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
-            style={{color: COLORS.darkBlue, fontSize: 22}}
-          />
-        )}
+
       </View>
       {error && (
-        <Text style={{marginTop: 7, color: COLORS.red, fontSize: 12}}>
+        <Text style={{ marginTop: 7, color: Color.NormalRed, fontSize: 12 }}>
           {error}
         </Text>
       )}
@@ -60,18 +48,19 @@ const Input = ({
 };
 
 const style = StyleSheet.create({
-  label: {
-    marginVertical: 5,
-    fontSize: 14,
-    color: COLORS.grey,
-  },
+
   inputContainer: {
-    height: 55,
-    backgroundColor: COLORS.light,
-    flexDirection: 'row',
-    paddingHorizontal: 15,
+    height:verticalScale (52),
+    width: scale(358),
+    borderRadius: 12,
+    backgroundColor: Color.LightBlack,
+    // flexDirection: 'row',
+    padding :moderateScale(15),
+     margin:moderateScale( 12),
     borderWidth: 0.5,
+    color: '#ffffff',
   },
+
 });
 
 export default Input;
