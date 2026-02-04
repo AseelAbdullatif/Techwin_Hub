@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
+import {Font} from "./../../../assets/fonts/Fonts"
 export default function HomeScreen({ route, navigation }) {
   const username = route.params?.username || 'Guest';
 
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome, {username} 👋</Text>
+      <Text style={styles.welcome}>السلام عليكم ورحمة الله, {username} 👋</Text>
+      <Text style={styles.welcome1}>اهلا بكم </Text>
 
       <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Logout</Text>
@@ -25,8 +26,16 @@ const styles = StyleSheet.create({
   welcome: {
     color: '#E0E1DD',
     fontSize: 24,
-    fontWeight: '600',
     marginBottom: 20,
+    fontFamily:Font.PrimaryFontBold
+  },
+  welcome1: {
+    color: '#E0E1DD',
+    fontSize: 24,
+
+    marginBottom: 20,
+    fontFamily:Font.PrimaryFontLight
+
   },
   button: {
     backgroundColor: '#1E6091',
