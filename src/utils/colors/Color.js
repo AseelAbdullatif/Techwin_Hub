@@ -1,13 +1,11 @@
 
-
-
-
-const Color = () => {
-  return (
-{
+const Color = {
 BackgroundBlack:'#161616',
-LightBlack:'#232323',
+LightBlack:'#1D1D1D',
+NormalBlack:'#000000',
 DarkGrey:'#3B3B3B',
+CardColor:'#2F2F2F',
+Borderinput:'#505050',
 Grey:'#747474',
 LightGrey:'#DFDFDF',
 White:'#ffffff',
@@ -21,7 +19,7 @@ gradientBlueFir:'#55AEFB',
 gradientBlueSkySec:'#03BFD3',
 }
 
-  );};
+;
 export default Color;
 
 // use 

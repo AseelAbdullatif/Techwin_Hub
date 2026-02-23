@@ -1,3 +1,28 @@
 {
+"common": {
+    "appName": "Techwin Hub",
+    "loading": "جاري التحميل",
+    "retry": "إعادة المحاولة"
+  },
 
+  "loginScreen": {
+    "title": "تسجيل الدخول",
+    "emailPlaceholder": "البريد الإلكتروني",
+    "passwordPlaceholder": "كلمة المرور",
+    "loginButton": "دخول",
+    "forgotPassword": "نسيت كلمة المرور؟"
+  },
+
+  "homeScreen": {
+    "welcome": "أهلًا بك 👋",
+    "subtitle": "نتمنى لك يومًا سعيدًا",
+    "searchPlaceholder": "ابحث هنا",
+    "logout": "تسجيل الخروج"
+  },
+
+  "profileScreen": {
+    "title": "الملف الشخصي",
+    "editProfile": "تعديل الملف الشخصي",
+    "settings": "الإعدادات"
+  }
 }
