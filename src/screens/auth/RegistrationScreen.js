@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, Pressable, Text, Image, View, TouchableOpacity,  } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import UserInput from '../../components/shared/UserInput'
 import Color from '../../utils/colors/Color';
@@ -8,56 +8,87 @@ import { Font } from '../../../assets/fonts/Fonts';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 
-export default function LoginScreen({ navigation }) {
+export default function RegistrationScreen({ navigation }) {
+
+  const [firstName, onChangeFirstName] = useState('');
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
-
+  const [confirmPassword, onChangeconfirmPassword] = useState('');
   const [errors, setErrors] = useState({
+
+    firstName: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
 
-  const handleLogin = () => {
+// handleLogin
+  const handleregest= () => {
     let newErrors = {};
+    if (!firstName.trim()) {
+      newErrors.firstName = 'الاسم مطلوب';
+    }
     if (!email.trim()) {
       newErrors.email = 'البريد الإلكتروني مطلوب';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'البريد الإلكتروني غير صحيح';
     }
-
+  
     if (!password) {
       newErrors.password = 'كلمة المرور مطلوبة';
     } else if (password.length < 6) {
-      newErrors.password = 'كلمة المرور غير صحيحة';
+      newErrors.password = 'كلمة المرور يجب أن تكون 6 أحرف على الأقل';
     }
 
-  
+    if (!confirmPassword) {
+      newErrors.confirmPassword = 'تأكيد كلمة المرور مطلوب';
+    } else if (password !== confirmPassword) {
+      newErrors.confirmPassword = 'كلمتا المرور غير متطابقتين';
+    }
+   
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-   
     setErrors({});
-    navigation.navigate('Home');
+    navigation.navigate('Home', { username: firstName });
   };
+
+
   return (
+
+
     <View style={styles.container}>
       <View style={styles.logoWrapper}>
+
         <Image
           style={styles.logo}
           source={require('../../../assets/images/techWin_hub_logo.png')} />
+
       </View>
-      <PrimaryText style={styles.texttitle} type="title">يا هلا فيك من جديد </PrimaryText>
-      <PrimaryText style={styles.text} type="body">سجل دخولك و استكمل متعة التحديات</PrimaryText>
-{/* <View > */}
+      
+      
+      <PrimaryText style={styles.texttitle} type="title">حياك الله في مجتمع تكوين</PrimaryText>
+      <PrimaryText style={styles.text} type="body">إنضم لنا وخلك جاهز للتحديات و الفعاليات</PrimaryText>
+ 
+      <UserInput
+        value={firstName}
+        onChangeText={onChangeFirstName}
+        placeholder="اسمك الأول"
+        error={errors.firstName}
+      />
+
       <UserInput
         value={email}
         onChangeText={onChangeEmail}
         placeholder="بريدك الإلكتروني"
         keyboardType="email-address"
         error={errors.email}
+
+
       />
+
       <UserInput
         value={password}
         onChangeText={onChangePassword}
@@ -65,23 +96,32 @@ export default function LoginScreen({ navigation }) {
         password={true}
         error={errors.password}
       />
-      {/* </View> */}
+
+      <UserInput
+
+        value={confirmPassword}
+        onChangeText={onChangeconfirmPassword}
+        placeholder="تأكيد كلمة المرور"
+        password={true}
+        error={errors.confirmPassword}
+      />
+     
       {/* replace تخلي يروح الهوم و اذا ضغط زر الى الوراء ما راح يرجع لصفحة انشاء حساب  */}
-      <Pressable onPress={() => navigation.navigate('Home')}>
-        <PrimaryText   type='body'  style={styles.textSkip} >تخطي التسجيل</PrimaryText>
+      <Pressable onPress={() => navigation.replace('Home')}>
+        <PrimaryText style={styles.textSkip} >تخطي التسجيل</PrimaryText>
       </Pressable>
 
-      <Pressable onPress={() => navigation.navigate('SighnUp')}>
-        <PrimaryText type='body' >ليس لديك حساب ؟</PrimaryText>
+      <Pressable onPress={() => navigation.navigate('Login')}>
+        <PrimaryText type='body' >لديك حساب بالفعل </PrimaryText>
       </Pressable>
 
-      < TouchableOpacity onPress={handleLogin}>
+      < TouchableOpacity onPress={handleregest}>
         <LinearGradient style={styles.boton}
           colors={[Color.gradientBlueSkySec, Color.gradientBlueFir]}
           start={{ x: 1, y: 0 }} // من اليمين
           end={{ x: 0, y: 0 }}   // إلى اليسار
         >
-          <Text style={styles.loginboton}>يلا نكمل</Text>
+          <Text style={styles.loginboton}>يلا نبدأ</Text>
         </LinearGradient>
 
       </TouchableOpacity>
@@ -97,22 +137,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Color.BackgroundBlack,
-    paddingHorizontal:scale(20),
-    textAlign: 'left',
-
-    // paddingVertical: scale(70),
-
+   textAlign:'left',
+    paddingVertical: scale(30),
   },
+
   texttitle: {
-     marginTop:scale(20),
+
   },
+
   text: {
-    paddingVertical: scale(10),
+    paddingVertical:scale(16),
 
   },
 
   logoWrapper: {
-    marginTop: scale(30),
+    marginVertical: scale(36),
     width: scale(80),
     height: scale(80),
     borderRadius: 24,
@@ -123,17 +162,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 20,
     elevation: 25,
-      
-
   },
 
   logo: {
     width: '100%',
     height: '100%',
-    
   },
 
   boton: {
+    backgroundColor: '#55AEFB',
       height: verticalScale(42),
     width: scale(330),
     borderRadius: 12,
@@ -142,7 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loginboton: {
-    color: '#000000',
+    color: Color.NormalBlack,
     textAlign: 'center',
     fontSize: scale(16),
     fontFamily:Font.PrimaryFontBold,
@@ -157,7 +194,7 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
-paddingHorizontal:scale(15),
+   paddingHorizontal:scale(15),
     borderRadius: 5,
   },
   buttonText: {
@@ -168,4 +205,7 @@ paddingHorizontal:scale(15),
     color: Color.White,
 
   },
+
+
 });
+
