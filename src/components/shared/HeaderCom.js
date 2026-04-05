@@ -4,25 +4,24 @@ import Color from '../../utils/colors/Color';
 import PrimaryText from '../../components/shared/PrimaryText';
 import Back from '../../../assets/icon/Back.svg';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const HeaderCom = ({ text = "بينقو", style, color, navigation }) => {
-
-
-
-
-
+const HeaderCom = ({ text = "بينقو", style, color }) => {
+const navigation =useNavigation();
   return (
 
     <View style={styles.headerstyle}>
 
-      <TouchableOpacity style={{ marginLeft: scale(10) }} onPress={() => navigation.navigate('SighnUp')}>
+      <TouchableOpacity style={{ marginLeft: scale(10) }}  onPress={() => navigation.navigate('Login')}>
         <Back width={30} height={30} color={Color.White} />
       </TouchableOpacity>
 
       <PrimaryText style={[styles.text, style, color ? { color } : {}]} type="title">
-        {text}
+        <PrimaryText type="subtitle" style={styles.buttonText}>
+             بينقو
+            </PrimaryText>
       </PrimaryText>
 
 

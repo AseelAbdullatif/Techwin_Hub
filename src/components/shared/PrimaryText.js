@@ -36,9 +36,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: Font.PrimaryFontSemiBold,
   },
+selectedcardtitle:{
+    
+    fontSize: moderateScale(12),
+    color: Color.White,
+    textAlign: 'center', 
+    fontFamily: Font.PrimaryFontSemiBold,
+  
+
+  },
+
   graytitle:{
     
-     fontSize: moderateScale(12),
+    fontSize: moderateScale(12),
     color: Color.Grey,
     textAlign: 'center', 
     fontFamily: Font.PrimaryFontSemiBold,
