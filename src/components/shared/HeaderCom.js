@@ -15,7 +15,11 @@ const navigation =useNavigation();
     <View style={styles.headerstyle}>
 
       <TouchableOpacity style={{ marginLeft: scale(10) }}  onPress={() => navigation.navigate('Login')}>
-        <Back width={30} height={30} color={Color.White} />
+      
+       < View>
+        <Back width={scale(30)} height={ verticalScale(30)} color={Color.White} />
+       </View>
+       
       </TouchableOpacity>
 
       <PrimaryText style={[styles.text, style, color ? { color } : {}]} type="title">
@@ -35,8 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor: Color.BackgroundBlack,
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: scale(15),
-    height: 60,
+    marginVertical: verticalScale(15),
+    height: verticalScale(60),
   },
 
   text: {
@@ -45,6 +49,12 @@ const styles = StyleSheet.create({
     color: Color.White,
     marginRight: scale(30),
   },
+
+viewback:{
+  borderBlockColor:Color.White,
+  borderRadius:
+},
+
 });
 
 export default HeaderCom;
