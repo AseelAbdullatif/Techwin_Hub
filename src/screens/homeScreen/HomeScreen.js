@@ -76,47 +76,6 @@ useEffect(() => {
   );
 };
   
-// const renderItem = ({ item }) => {
-//   const isSelected = selectedIds.includes(item.id);
-
-// const handlePress = () => {
-//   // تحقق إذا كانت البطاقة موجودة في القائمة
-//   const alreadySelected = selectedIds.includes(item.id);
-
-//   if (alreadySelected) {
-//     //عكس الحاله لفولز
-//     const updatedSelected = selectedIds.filter(id => id !== item.id);
-//     setSelectedIds(updatedSelected);
-//   } else {
-//     //عكس الحالة لترو
-//     const updatedSelected = selectedIdss.concat(item.id);
-//     setSelectedIds(updatedSelected);
-//   }
-// };
-
-//   return (
-//     <TouchableOpacity
-//       onPress={handlePress}
-//       style={isSelected ? styles.selecteditem : styles.item}
-//     >
-//       <PrimaryText
-//         type={isSelected ? "selectedcardtitle" : "graytitle"}
-//         style={styles.text}
-//       >
-//         {item.task}
-//       </PrimaryText>
-
-//       <PrimaryText
-//         type={isSelected ? "selectedcardtitle" : "graytitle"}
-//         style={styles.text}
-//       >
-//         +{item.score}
-//       </PrimaryText>
-//     </TouchableOpacity>
-//   );
-// };
-
-
 
   return (//*** ******
     <View style={GlobalStyles.container}>
@@ -149,14 +108,7 @@ useEffect(() => {
           ))}
         </View>
 
-{/*  
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          numColumns={3}   //  هذا يحولها إلى Grid
-          showsVerticalScrollIndicator={false}
-        /> */}
+
 
 
 <FlatList
@@ -180,7 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.LightBlack,
     borderRadius: 12,
     marginHorizontal: scale(12),
-    height: verticalScale(350),
+    height: verticalScale(380),
     padding: scale(5),
     marginBottom: verticalScale(20),
     // paddingBottom:verticalScale(20)

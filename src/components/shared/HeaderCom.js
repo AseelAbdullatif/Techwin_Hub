@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
 viewback:{
   borderBlockColor:Color.White,
-  borderRadius:
+  // borderRadius:
 },
 
 });

@@ -5,7 +5,6 @@ import Color from '../../utils/colors/Color';
 import PrimaryText from '../../components/shared/PrimaryText';
 import { GlobalStyles } from '../../utils/styles/GlobalStyles';
 import SummaryCard from '../../components/shared/SummaryCard';
-import Leaderboard from '../../components/shared/Leaderboard';
 import HeaderCom from '../../components/shared/HeaderCom';
 // import TopTab from '../../components/shared/TopTab';
 import CheckCircle from '../../../assets/icon/CheckCircle.svg';
@@ -13,75 +12,57 @@ import Zapped from '../../../assets/icon/Zapped.svg';
 import Crown from '../../../assets/icon/Crown.svg';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import LinearGradient from 'react-native-linear-gradient';
-import BottomPopup from '../../components/shared/BottomPopup';
 
+const PrimaryButton = ({
+  name,
+  score,
+  rank,
+  style,
 
-// 👇 fake data
-const USERS_DATA = [
-  {
-    id: 1,
-    name: "أحمد",
-    score: 100,
-    rank: 1,
-    image: "https://wpcdn.web.wsu.edu/news/uploads/sites/2797/2025/03/cat2-1024x676.jpg",
-  },
-  {
-    id: 2,
-    name: "علي ",
-    score: 90,
-    rank: 2,
-        // image: "https://cdn-icons-png.flaticon.com/512/3237/3237472.png",
+  image = { uri: 'https://cdn-icons-png.flaticon.com/512/3237/3237472.png' }
 
-  },
-  {
-    id: 3,
-    name: "عبدالله",
-    score: 80,
-    rank: 3,
-    image: "https://ichef.bbci.co.uk/ace/standard/2048/cpsprodpb/aac7/live/66fb3490-ca0d-11f0-86af-23a21b51892f.jpg",
-  },
-];
-export default function Tops({ route, navigation }) {
+}) => {
+  const isFirst = rank === 1;
+  return (
+    <View >
+      <View style={isFirst ? styles.containermainbarfirst : styles.containermainbar}>
+        <ImageBackground source={image} resizeMode="cover" 
+        style={isFirst? styles.imageone : styles.image} >
+        </ImageBackground>
 
+        <LinearGradient style={isFirst? styles.one : styles.twothree}
+          colors={[Color.gradientBlueSkySec, Color.gradientBlueFir]}
+          start={{ x: 1, y: 0 }}
+          end={{ x: 0, y: 0 }} >
+          <PrimaryText type='textboton' style={isFirst? { fontSize: 25, }:{ fontSize: 20, }}>{rank}</PrimaryText>
+        </LinearGradient>
 
-  // const image = { uri: 'https://wpcdn.web.wsu.edu/news/uploads/sites/2797/2025/03/cat2-1024x676.jpg' };
+        <PrimaryText type={isFirst ? 'title' : 'subtitle'}
+          style={isFirst?{ position: 'absolute', zIndex: 30, top: 190, }:{ position: 'absolute', zIndex: 21, top: 140, }}
+          color={Color.White}
+        >{name}
+        </PrimaryText>
 
-
-  return (//*** ******
-    
-    <View style={GlobalStyles.container}>
-
-      <View style={styles.topscontainer}>
-
-        <BottomPopup topsusers={USERS_DATA}/>
+        <PrimaryText
+         type={isFirst ? 'title' : 'subtitle'}
+          color={Color.White}
+          style={isFirst?{ position: 'absolute', zIndex: 30, top: 220, }:{ position: 'absolute', zIndex: 21, top: 165, }}>
+          {score}🏆
+        </PrimaryText>
       </View>
-<View>
-
-      <View style={styles.bingocontainer}>
-
-
-  {/* <PrimaryText type='subtitle'   >jhgfcdxsfcgvbhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</PrimaryText> */}
-  {/* <PrimaryText type='subtitle'   >jhgfcdxsfcgvbhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</PrimaryText> */}
-<Leaderboard />
-
-<Leaderboard />
-<Leaderboard />
-
-      </View>
-      </View>
+      
     </View>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
-  topscontainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingTop: verticalScale(50),
-    width: '100%',
-  height: verticalScale(270),
-  },
+  // topscontainer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-around',
+  //   paddingTop: verticalScale(50),
+  //   width: '100%',
+
+  // },
 
   containermainbarfirst: {
     marginTop: -20,
@@ -94,13 +75,13 @@ const styles = StyleSheet.create({
 
   bingocontainer: {
     backgroundColor: Color.LightBlack,
-    borderRadius: 40,
-    // marginHorizontal: scale(40),
+    borderRadius: 12,
+    marginHorizontal: scale(12),
+    height: verticalScale(380),
+    padding: scale(5),
+    marginBottom: verticalScale(20),
+    // paddingBottom:verticalScale(20)
 
-    height: verticalScale(400),
-    padding: moderateScale(20),
-    
-paddingTop:verticalScale(25),
   },
 
   containermainbar: {
@@ -170,13 +151,15 @@ paddingTop:verticalScale(25),
     shadowColor: Color.LightBlue,
     borderColor: Color.NormalBlue,
     shadowOffset: {
-	width: 0,
-	height: 12,
-},
-shadowOpacity: 0.58,
-shadowRadius: 16.00,
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
 
-elevation: 24,
+    elevation: 24,
   },
 
 });
+
+export default PrimaryButton;
