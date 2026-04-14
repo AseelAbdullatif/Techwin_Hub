@@ -1,44 +1,50 @@
-import React from 'react';
-import { View, TouchableOpacity, StyleSheet, FlatList, Dimensions } from 'react-native';
-//*** */
+import React , { useState ,useEffect}from 'react';
+import { View, TouchableOpacity, StyleSheet, FlatList, Dimensions,Alert, Modal } from 'react-native';
 import Color from '../../utils/colors/Color';
 import PrimaryText from '../../components/shared/PrimaryText';
 import { GlobalStyles } from '../../utils/styles/GlobalStyles';
 import SummaryCard from '../../components/shared/SummaryCard';
-import HeaderCom from '../../components/shared/HeaderCom';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import CheckCircle from '../../../assets/icon/CheckCircle.svg';
 import Zapped from '../../../assets/icon/Zapped.svg';
 import StarFill from '../../../assets/icon/StarFill.svg';
+import BingoCard from '../../components/shared/BingoCard';
+import axios from 'axios';
+
 
 
 export default function HomeScreen({ route, navigation }) {
   const username = route.params?.username || 'Guest';
 
 
-
-  const data = [
-    { id: 1, task: "قهوه مع زميل", score: 25 },
-    { id: 2, task: "مساعدة زميل في مشروع", score: 25 },
-    { id: 3, task: "قراءة مقال تقني", score: 25 },
-    { id: 4, task: "ترتيب المكتب", score: 25 },
-    { id: 5, task: "تعلم اساسيات فيقما ", score: 25 },
-    { id: 6, task: "قهوه مع زميل", score: 25 },
-    { id: 7, task: "ترتيب المكتب", score: 25 },
-    { id: 8, task: "قراءة مقال تقني", score: 25 },
-    { id: 9, task: "تعلم اساسيات فيقما ", score: 100 },
-    { id: 10, task: "قراءة مقال تقني", score: 25 },
-    { id: 11, task: "تعلم اساسيات فيقما ", score: 25 },
-    { id: 12, task: "مساعدة زميل", score: 25 },
-    { id: 13, task: "ترتيب المكتب", score: 25 },
-    { id: 14, task: "تعلم اساسيات فيقما ", score: 25 },
-    { id: 15, task: "مساعدة زميل", score: 25 },
-    { id: 16, task: "ترتيب المكتب", score: 25 },
-  ];
+  const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [selectedIds, setSelectedIds] = useState([]);
+  
 
 
+const api = axios.create({
+  baseURL: 'https://699bf36e110b5b738cc142c5.mockapi.io',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+useEffect(() => {
+  const getchData = async () => {
+    try {
+      const response = await api.get('/tasks'); 
+      setData(response.data);
+    } catch (error) {
+      console.log('API Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  getchData(); 
+}, );
   // ******************************كلمة بينقو
+
   const letters = [
     { char: 'B', color: Color.NormalPurple },
     { char: 'I', color: Color.NormalRed },
@@ -49,50 +55,86 @@ export default function HomeScreen({ route, navigation }) {
 
   ];
 
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <PrimaryText type="graytitle" style={styles.text}>{item.task}</PrimaryText>
-      <PrimaryText type="graytitle" style={styles.text}>+{item.score}</PrimaryText>
 
-    </View>
+  const renderItem = ({ item }) => {
+  const isSelected = selectedIds.includes(item.id);
 
+  const handlePress = () => {
+    if (isSelected) {
+      setSelectedIds(selectedIds.filter(id => id !== item.id));
+    } else {
+      setSelectedIds([...selectedIds, item.id]);
+    }
+  };
+
+  return (
+    <BingoCard
+      item={item}
+      isSelected={isSelected}
+      onPress={handlePress}
+    />
   );
+};
+  
+// const renderItem = ({ item }) => {
+//   const isSelected = selectedIds.includes(item.id);
+
+// const handlePress = () => {
+//   // تحقق إذا كانت البطاقة موجودة في القائمة
+//   const alreadySelected = selectedIds.includes(item.id);
+
+//   if (alreadySelected) {
+//     //عكس الحاله لفولز
+//     const updatedSelected = selectedIds.filter(id => id !== item.id);
+//     setSelectedIds(updatedSelected);
+//   } else {
+//     //عكس الحالة لترو
+//     const updatedSelected = selectedIdss.concat(item.id);
+//     setSelectedIds(updatedSelected);
+//   }
+// };
+
+//   return (
+//     <TouchableOpacity
+//       onPress={handlePress}
+//       style={isSelected ? styles.selecteditem : styles.item}
+//     >
+//       <PrimaryText
+//         type={isSelected ? "selectedcardtitle" : "graytitle"}
+//         style={styles.text}
+//       >
+//         {item.task}
+//       </PrimaryText>
+
+//       <PrimaryText
+//         type={isSelected ? "selectedcardtitle" : "graytitle"}
+//         style={styles.text}
+//       >
+//         +{item.score}
+//       </PrimaryText>
+//     </TouchableOpacity>
+//   );
+// };
+
+
 
   return (//*** ******
     <View style={GlobalStyles.container}>
-      <HeaderCom text="بينقو" />
-
-      <View style={styles.nav}>
-        <TouchableOpacity
-          style={styles.buttonnav}
-          onPress={() => navigation.navigate('SighnUp')}
-        >
-          <PrimaryText type="subtitle" style={styles.buttonText}>
-            لوحة المهام
-          </PrimaryText>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('SighnUp')}
-        >
-          <PrimaryText type="subtitle" style={styles.buttonText}>
-            المتصدرين
-          </PrimaryText>
-        </TouchableOpacity>
-      </View>
-
+   
+{/* ********************************كومبوننت السامري كارد */}
       <View style={styles.containermainbar}>
         {/* *************************************النقاط */}
         <SummaryCard icon={StarFill} count={3} label="النقاط" iconcolor={Color.NormalYellow} bordercolor={Color.NormalYellow} />
 
         {/* *******************************عدد البينقو */}
-        <SummaryCard icon={CheckCircle} count={3} label="عدد البينقو" iconcolor={Color.LightGreen} bordercolor={Color.LightGreen} />
+        <SummaryCard icon={ Zapped} count={3} label="عدد البينقو" iconcolor={Color.LightBlue} bordercolor={Color. LightBlue} />
 
         {/* ****************************المهام المكتملة  */}
-        <SummaryCard icon={Zapped} count={3} lable="المهام المكتملة" iconcolor={Color.LightBlue} bordercolor={Color.LightBlue} />
+        <SummaryCard icon={CheckCircle} count={3} label="المهام المكتملة" iconcolor={Color. LightGreen} bordercolor={Color.LightGreen} />
       </View>
-
       <View style={styles.bingocontainer}>
+
+{/* ************************************************كلمة بينقو  */}
         <View style={{ flexDirection: 'row-reverse', justifyContent: 'center', marginBottom: verticalScale(12) }}>
           {letters.map((item, index) => (
             <PrimaryText
@@ -107,13 +149,25 @@ export default function HomeScreen({ route, navigation }) {
           ))}
         </View>
 
+{/*  
         <FlatList
           data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           numColumns={3}   //  هذا يحولها إلى Grid
           showsVerticalScrollIndicator={false}
-        />
+        /> */}
+
+
+<FlatList
+  data={data}
+  renderItem={renderItem}
+  keyExtractor={(item) => item.id.toString()}
+  numColumns={3}
+  showsVerticalScrollIndicator={false}
+ 
+/>
+          
       </View>
 
     </View>
@@ -136,20 +190,44 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     margin: moderateScale(4),
-    height: verticalScale(120),
+    height: verticalScale(100),
+    
     borderRadius: moderateScale(8),
     borderWidth: scale(1),
-    borderColor: Color.Grey,
+    borderColor: Color.Grey,  
     backgroundColor: Color.CardColor,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
 
+   selecteditem: {
+    flex: 1,
+    margin: moderateScale(4),
+    height: verticalScale(100),
+    borderRadius: moderateScale(8),
+    borderWidth: scale(1),
+    borderColor: Color.NormalBlue,  
+    backgroundColor: Color.LightBlack,
+    justifyContent: 'center',
+    alignItems: 'center',
+        shadowColor: Color.NormalBlue,
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 14.00,
+
+        elevation: 30,
+
+    
+  },
+
   containermainbar: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: scale(44),
+    marginVertical: scale(30),
     justifyContent: 'space-around',
     marginHorizontal: scale(10),
     paddingVertical: moderateScale(10),

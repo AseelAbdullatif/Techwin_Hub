@@ -67,7 +67,7 @@ export default function LoginScreen({ navigation }) {
       />
       {/* </View> */}
       {/* replace تخلي يروح الهوم و اذا ضغط زر الى الوراء ما راح يرجع لصفحة انشاء حساب  */}
-      <Pressable onPress={() => navigation.navigate('Home')}>
+      <Pressable onPress={() => navigation.replace('Home')}>
         <PrimaryText   type='body'  style={styles.textSkip} >تخطي التسجيل</PrimaryText>
       </Pressable>
 

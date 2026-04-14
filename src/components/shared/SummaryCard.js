@@ -28,7 +28,7 @@ const SummaryCard = ({icon:Icon,count,label,iconcolor,bordercolor,style}) => {
 const styles = StyleSheet.create({
   mainbar: {
     backgroundColor: Color.LightBlack,
-    height: verticalScale(78),
+    height: verticalScale(80),
     width: scale(100),
     borderRadius: 4,
     alignItems: 'center',

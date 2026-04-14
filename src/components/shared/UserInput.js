@@ -93,7 +93,7 @@ const style = StyleSheet.create({
     // flex: 1, عملي فراغ كبير بين الانبوت فيلد
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical:scale(10),
+    marginVertical:verticalScale(10),
     marginHorizontal: scale(50),
   },
 
