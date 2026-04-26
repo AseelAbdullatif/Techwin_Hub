@@ -50,10 +50,10 @@ const UserInput =
           {password && (
             <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
               {hidePassword ? (
-                              <Eye_slash width={20} height={20} />
+                              <Eye_slash width={scale(20)} height={verticalScale(20)} />
 
               ) : (
-                  <Eye  width={20} height={20}  color={Color.Grey}/>
+                  <Eye  width={scale(20)} height={verticalScale(20)}  color={Color.Grey}/>
               )}
             </TouchableOpacity>
           )}
@@ -80,10 +80,10 @@ const style = StyleSheet.create({
     width: scale(330),
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: scale(1),
     borderColor: Color.LightGrey,
     backgroundColor: Color.LightBlack,
-    borderRadius: 12,
+    borderRadius: moderateScale(12),
     color: Color.White,
     paddingHorizontal:scale(10),
     fontFamily: Font.PrimaryFontLight,
@@ -98,7 +98,7 @@ const style = StyleSheet.create({
   },
 
   errormassage: {
-    marginBottom: scale(7),
+    marginBottom: verticalScale(7),
     color: Color.NormalRed,
     fontSize: 12,
     textAlign: 'left',   

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Pressable, Text, Image, View, TouchableOpacity,  } from 'react-native';
+import { StyleSheet, Pressable, Modal, Text, Image, View, TouchableOpacity, } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import UserInput from '../../components/shared/UserInput'
 import Color from '../../utils/colors/Color';
@@ -14,6 +14,7 @@ export default function RegistrationScreen({ navigation }) {
   const [email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const [confirmPassword, onChangeconfirmPassword] = useState('');
+
   const [errors, setErrors] = useState({
 
     firstName: '',
@@ -22,8 +23,8 @@ export default function RegistrationScreen({ navigation }) {
     confirmPassword: '',
   });
 
-// handleLogin
-  const handleregest= () => {
+  // handleLogin
+  const handleregest = () => {
     let newErrors = {};
     if (!firstName.trim()) {
       newErrors.firstName = 'الاسم مطلوب';
@@ -33,7 +34,7 @@ export default function RegistrationScreen({ navigation }) {
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'البريد الإلكتروني غير صحيح';
     }
-  
+
     if (!password) {
       newErrors.password = 'كلمة المرور مطلوبة';
     } else if (password.length < 6) {
@@ -45,7 +46,7 @@ export default function RegistrationScreen({ navigation }) {
     } else if (password !== confirmPassword) {
       newErrors.confirmPassword = 'كلمتا المرور غير متطابقتين';
     }
-   
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -67,11 +68,11 @@ export default function RegistrationScreen({ navigation }) {
           source={require('../../../assets/images/techWin_hub_logo.png')} />
 
       </View>
-      
-      
+
+
       <PrimaryText style={styles.texttitle} type="title">حياك الله في مجتمع تكوين</PrimaryText>
       <PrimaryText style={styles.text} type="body">إنضم لنا وخلك جاهز للتحديات و الفعاليات</PrimaryText>
- 
+
       <UserInput
         value={firstName}
         onChangeText={onChangeFirstName}
@@ -105,15 +106,15 @@ export default function RegistrationScreen({ navigation }) {
         password={true}
         error={errors.confirmPassword}
       />
-     
-      {/* replace تخلي يروح الهوم و اذا ضغط زر الى الوراء ما راح يرجع لصفحة انشاء حساب  */}
-      <Pressable onPress={() => navigation.replace('Home')}>
-        <PrimaryText style={styles.textSkip} >تخطي التسجيل</PrimaryText>
-      </Pressable>
 
-      <Pressable onPress={() => navigation.navigate('Login')}>
-        <PrimaryText type='body' >لديك حساب بالفعل </PrimaryText>
-      </Pressable>
+      {/* replace تخلي يروح الهوم و اذا ضغط زر الى الوراء ما راح يرجع لصفحة انشاء حساب  */}
+      <TouchableOpacity onPress={() => navigation.replace('Profile')}>
+        <PrimaryText style={styles.textSkip} >تخطي التسجيل</PrimaryText>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <PrimaryText type='body' >عندك حساب؟ سجل دخول</PrimaryText>
+      </TouchableOpacity>
 
       < TouchableOpacity onPress={handleregest}>
         <LinearGradient style={styles.boton}
@@ -137,8 +138,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Color.BackgroundBlack,
-   textAlign:'left',
-    paddingVertical: scale(30),
+    textAlign: 'left',
+    paddingVertical: verticalScale(30),
   },
 
   texttitle: {
@@ -146,15 +147,15 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    paddingVertical:scale(16),
+    paddingVertical: verticalScale(16),
 
   },
 
   logoWrapper: {
-    marginVertical: scale(36),
+    marginVertical: verticalScale(36),
     width: scale(80),
     height: scale(80),
-    borderRadius: 24,
+    borderRadius: moderateScale(24),
     overflow: 'hidden',
     transform: [{ rotate: '13.06deg' }],
     shadowColor: '#FFFFFF',
@@ -171,10 +172,10 @@ const styles = StyleSheet.create({
 
   boton: {
     backgroundColor: '#55AEFB',
-      height: verticalScale(42),
+    height: verticalScale(42),
     width: scale(330),
-    borderRadius: 12,
-    marginVertical: scale(20),
+    borderRadius: moderateScale(12),
+    marginVertical: verticalScale(20),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     color: Color.NormalBlack,
     textAlign: 'center',
     fontSize: scale(16),
-    fontFamily:Font.PrimaryFontBold,
+    fontFamily: Font.PrimaryFontBold,
 
   },
 
@@ -194,8 +195,8 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
-   paddingHorizontal:scale(15),
-    borderRadius: 5,
+    paddingHorizontal: scale(15),
+    borderRadius: moderateScale(5),
   },
   buttonText: {
     fontSize: 18,

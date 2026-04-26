@@ -29,7 +29,7 @@ const PrimaryButton = ({
           backgroundColor: isDisabled? Colors.gray100:isColored ? Colors.primary : 'transparent',
           borderColor: isColored ? 'transparent' : Colors.gray200,
           borderWidth: isColored ? 0 : scale(1),
-          paddingHorizontal: moderateScale(10),
+          paddingHorizontal: scale(10),
         },
         style,
         

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
-import { scale, verticalScale } from 'react-native-size-matters';
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
 import { Colors } from '../../utils/Colors/Colors';
 import { GlobalStyle } from '../../utils/GlobalStyle/GlobalStyle';
 
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     borderTopRightRadius: scale(40),
     borderTopLeftRadius: scale(40),
-    padding: scale(20),
+    padding: moderateScale(20),
   },
   header: {
     flexDirection: 'row',

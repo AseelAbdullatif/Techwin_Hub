@@ -67,13 +67,13 @@ export default function LoginScreen({ navigation }) {
       />
       {/* </View> */}
       {/* replace تخلي يروح الهوم و اذا ضغط زر الى الوراء ما راح يرجع لصفحة انشاء حساب  */}
-      <Pressable onPress={() => navigation.replace('Home')}>
+      <TouchableOpacity onPress={() => navigation.replace('Home')}>
         <PrimaryText   type='body'  style={styles.textSkip} >تخطي التسجيل</PrimaryText>
-      </Pressable>
+      </TouchableOpacity>
 
-      <Pressable onPress={() => navigation.navigate('SighnUp')}>
-        <PrimaryText type='body' >ليس لديك حساب ؟</PrimaryText>
-      </Pressable>
+      <TouchableOpacity onPress={() => navigation.navigate('SighnUp')}>
+        <PrimaryText type='body'>ما عندك حساب؟ سجّل الآن</PrimaryText>
+      </TouchableOpacity>
 
       < TouchableOpacity onPress={handleLogin}>
         <LinearGradient style={styles.boton}
@@ -104,18 +104,18 @@ const styles = StyleSheet.create({
 
   },
   texttitle: {
-     marginTop:scale(20),
+     marginTop:verticalScale(20),
   },
   text: {
-    paddingVertical: scale(10),
+    paddingVertical: verticalScale(10),
 
   },
 
   logoWrapper: {
-    marginTop: scale(30),
+    marginTop: verticalScale(30),
     width: scale(80),
-    height: scale(80),
-    borderRadius: 24,
+    height: verticalScale(80),
+    borderRadius: moderateScale(24),
     overflow: 'hidden',
     transform: [{ rotate: '13.06deg' }],
     shadowColor: '#FFFFFF',
@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
   boton: {
       height: verticalScale(42),
     width: scale(330),
-    borderRadius: 12,
-    marginVertical: scale(20),
+    borderRadius: moderateScale(12),
+    marginVertical: verticalScale(20),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
 paddingHorizontal:scale(15),
-    borderRadius: 5,
+    borderRadius: moderateScale(5),
   },
   buttonText: {
     fontSize: 18,

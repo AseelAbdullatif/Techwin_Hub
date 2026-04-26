@@ -14,9 +14,11 @@ NormalRed:'#ff4500',
 NormalYellow:'#F2C200', 
 NormalPurple:'#7A3BF1',
 NormalBlue:'#03BFD3',
+NormalBluergba:'rgba(3, 190, 211, 0.23)',
 LightGreen:'#0CC414',
 gradientBlueFir:'#55AEFB',
 gradientBlueSkySec:'#03BFD3',
+TransparentBlack:'rgba(52, 52, 52, 0.8)',
 }
 
 ;
