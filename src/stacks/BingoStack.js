@@ -1,26 +1,27 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
 import Color from '../utils/colors/Color';
-import HomeScreen from '../screens/homeScreen/HomeScreen';
-import TheTops from '../screens/homeScreen/TheTops';
+import BingoScreen from '../screens/homeScreen/BingoScreen';
+import TheTopsScreen from '../screens/homeScreen/TheTopsScreen';
 import HeaderCom from '../components/shared/HeaderCom';
-import { scale, verticalScale } from 'react-native-size-matters';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
 const Tab = createMaterialTopTabNavigator();
 
-const MyTabs = ()=> {
+const MyTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: styles.nav,
         tabBarIndicatorStyle: styles.indicatoystyle,
+        tabBarActiveTintColor: Color.White,   
+        tabBarInactiveTintColor: Color.Grey,           
         tabBarLabelStyle: styles.buttonText,
       }}
     >
-      <Tab.Screen name="لوحة المهام" component={HomeScreen} />
-      <Tab.Screen name="المتصدرين" component={TheTops} />
+      <Tab.Screen name="لوحة المهام" component={BingoScreen} />
+      <Tab.Screen name="المتصدرين" component={TheTopsScreen} />
     </Tab.Navigator>
   );
 }
@@ -28,7 +29,7 @@ const MyTabs = ()=> {
 const BingoStack = () => {
   return (
     <View style={styles.navcontainer}>
-      <HeaderCom text="بينقو"  />
+      <HeaderCom text="بينقو" />
       <MyTabs />
     </View>
   );
@@ -37,31 +38,35 @@ const BingoStack = () => {
 export default BingoStack;
 
 const styles = StyleSheet.create({
-  navcontainer:{
-    flex:1,
-    backgroundColor: Color.BackgroundBlack, 
-    
+  navcontainer: {
+    flex: 1,
+    backgroundColor: Color.BackgroundBlack,
+
   },
-  indicatoystyle:{
- backgroundColor: Color.NormalBlue, // أزرق
-  height: 2,
-  width: 90, // طول الخط
-  marginHorizontal: 30, // يخليه في النص (تقدرين تعدلينها)
-  borderRadius: 10,
+  indicatoystyle: {
+    backgroundColor: Color.NormalBlue, // أزرق
+    height: verticalScale(2),
+    width: scale(80), // طول الخط
+    marginHorizontal: scale(30), // يخليه في النص (تقدرين تعدلينها)
+    borderRadius: moderateScale(10),
+  shadowColor: Color.NormalBlue,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 20,
+    elevation: 25,
 
   },
   nav: {
     backgroundColor: Color.LightBlack,
-    borderRadius: 50,
-     height: verticalScale(40),
+    borderRadius: moderateScale(50),
+    height: verticalScale(40),
     width: scale(250),
-     alignItems: 'center',
+    alignItems: 'center',
     justifyContent: 'space-around',
     alignSelf: 'center',
     flexDirection: 'row',
   },
   buttonText: {
-    color: '#ffffff',
-    fontSize: 18,
+    fontSize: moderateScale(18),
   },
 });

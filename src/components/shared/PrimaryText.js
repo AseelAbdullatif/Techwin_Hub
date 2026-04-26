@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, I18nManager } from 'react-native';
 import Color from '../../utils/colors/Color';
 import {Font} from '../../../assets/fonts/Fonts';
-import { moderateScale, scale } from 'react-native-size-matters';
+import { moderateScale, scale, verticalScale } from 'react-native-size-matters';
 
 const PrimaryText = ({ type = 'body', children, style, color }) => {
 
@@ -30,12 +30,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily:Font.PrimaryFontBold,
   },
+   smalltitle: {
+    fontSize: moderateScale(18),
+    color: Color.White,
+    textAlign: 'center',
+    fontFamily:Font.PrimaryFontBold,
+  },
   subtitle: {
     fontSize: moderateScale(14),
     color: Color.White,
     textAlign: 'center',
     fontFamily: Font.PrimaryFontSemiBold,
   },
+
+
+  
 selectedcardtitle:{
     
     fontSize: moderateScale(12),
@@ -70,7 +79,7 @@ selectedcardtitle:{
   },
 
   errormassage: {
-    marginVertical:scale(7),
+    marginVertical:verticalScale(7),
     color: Color.NormalRed,
     fontSize: 12,
     textAlign:'left',

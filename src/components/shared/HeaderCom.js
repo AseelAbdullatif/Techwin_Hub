@@ -2,30 +2,30 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import Color from '../../utils/colors/Color';
 import PrimaryText from '../../components/shared/PrimaryText';
-import Back from '../../../assets/icon/Back.svg';
+import Back from '../../../assets/icon/back.svg';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import { useNavigation } from '@react-navigation/native';
 
 
 
-const HeaderCom = ({ text = "بينقو", style, color }) => {
-const navigation =useNavigation();
+const HeaderCom = ({ text, style, color }) => {
+  const navigation = useNavigation();
   return (
 
     <View style={styles.headerstyle}>
 
-      <TouchableOpacity style={{ marginLeft: scale(10) }}  onPress={() => navigation.navigate('Login')}>
-      
-       < View>
-        <Back width={scale(30)} height={ verticalScale(30)} color={Color.White} />
-       </View>
-       
+      <TouchableOpacity style={styles.viewback} onPress={() => navigation.navigate('Login')}>
+
+        < View  >
+          <Back width={scale(25)} height={verticalScale(25)} color={Color.White} />
+        </View>
+
       </TouchableOpacity>
 
       <PrimaryText style={[styles.text, style, color ? { color } : {}]} type="title">
         <PrimaryText type="subtitle" style={styles.buttonText}>
-             بينقو
-            </PrimaryText>
+          {text}
+        </PrimaryText>
       </PrimaryText>
 
 
@@ -35,12 +35,13 @@ const navigation =useNavigation();
 
 const styles = StyleSheet.create({
   headerstyle: {
-    color: Color.NormalPurple,
     backgroundColor: Color.BackgroundBlack,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: verticalScale(15),
     height: verticalScale(60),
+    marginLeft: scale(20)
+
   },
 
   text: {
@@ -50,10 +51,17 @@ const styles = StyleSheet.create({
     marginRight: scale(30),
   },
 
-viewback:{
-  borderBlockColor:Color.White,
-  // borderRadius:
-},
+  viewback: {
+    borderColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'rgba(61, 58, 58, 0.8)',
+    borderRadius: moderateScale(17.5),
+    width: scale(35),
+    height: verticalScale(35),
+    borderWidth: scale(0.6),
+    justifyContent: 'center',
+    alignItems: 'center',  // borderRadius:
+
+  },
 
 });
 

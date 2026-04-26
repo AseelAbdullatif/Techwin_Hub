@@ -1,20 +1,22 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-
-import PrimaryText from '../../components/shared/PrimaryText';
-import Color from '../../utils/colors/Color';
+import Color from '../../../utils/colors/Color';
+import PrimaryText from '../../shared/PrimaryText';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 
-const BingoCard = ({ item, isSelected, onPress }) => {
+
+const BingoCard = ({ item, onPress }) => {
   return (
+    
     <TouchableOpacity
       onPress={onPress}
-      style={isSelected ? styles.selectedItem : styles.item}
+      style={item.isSelected ? styles.selectedItem : styles.item}
       activeOpacity={0.8}
     >
+      
       {/* اسم المهمة */}
       <PrimaryText
-        type={isSelected ? "selectedcardtitle" : "graytitle"}
+        type={item.isSelected ? "selectedcardtitle" : "graytitle"}
         style={styles.text}
       >
         {item.task}
@@ -22,7 +24,7 @@ const BingoCard = ({ item, isSelected, onPress }) => {
 
       {/* النقاط */}
       <PrimaryText
-        type={isSelected ? "selectedcardtitle" : "graytitle"}
+        type={item.isSelected ? "selectedcardtitle" : "graytitle"}
         style={styles.text}
       >
         +{item.score}
@@ -37,10 +39,10 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     margin: moderateScale(4),
-    height: verticalScale(100),
+    height: verticalScale(95),
     borderRadius: moderateScale(8),
-    borderWidth: scale(1),
-    borderColor: Color.Grey,
+    borderWidth: scale(2),
+    borderColor: Color.DarkGrey,
     backgroundColor: Color.CardColor,
     justifyContent: 'center',
     alignItems: 'center',
@@ -49,9 +51,9 @@ const styles = StyleSheet.create({
   selectedItem: {
     flex: 1,
     margin: moderateScale(4),
-    height: verticalScale(100),
+    height: verticalScale(95),
     borderRadius: moderateScale(8),
-    borderWidth: scale(1),
+    borderWidth: scale(2),
     borderColor: Color.NormalBlue,
     backgroundColor: Color.LightBlack,
     justifyContent: 'center',
@@ -70,6 +72,6 @@ const styles = StyleSheet.create({
 
   text: {
     textAlign: 'center',
-    marginVertical: scale(2),
+    marginVertical: verticalScale(2),
   },
 });
